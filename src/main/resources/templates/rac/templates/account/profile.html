@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<head>
+	<title>Home 03</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" th:href="@{/images/icons/favicon.png}" />
+
+	<!--===============================================================================================-->
+</head>
+
+<body class="animsition" ng-app="shopping-cart-app" ng-controller="shopping-cart-ctrl">
+	<main>
+		<div th:replace="/layout/cart.html"></div>
+		<section class="bg0 p-t-120 p-b-60" ng-controller="profile-ctrl">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 col-lg-3 p-b-80">
+						<div th:replace="/account/navsidebar.html"></div>
+					</div>
+					<div class="col-md-8 col-lg-9 p-b-80">
+						<form class="bg0 ng-pristine ng-valid" method="post">
+							<h4 class="mtext-105 cl2 txt-center p-b-30">Hồ sơ</h4>
+							<div class="row">
+								<div class="col-4">
+									<label for="inuput_img">
+										<img style="height: 230px;object-fit: cover;" class="pointer w-100"
+											ng-src="{{'/images/avatar/' + user.profile.photo}}">
+									</label>
+									<input hidden onchange="angular.element(this).scope().imageChanged(this.files)"
+										style="width:60%;" name="hinhanh" type="file" accept="image/*" id="inuput_img">
+								</div>
+								<div class="col-8 p-l-0">
+									<div class="bor8 how-pos4-parent d-flex m-b-20">
+										<p style="padding: 10px"><strong>Tên đăng nhập:
+											</strong>{{user.profile.username}}</p>
+									</div>
+
+									<div class="bor8 m-b-20 how-pos4-parent d-flex">
+										<p style="padding: 10px 10px 0px 10px"><strong>Họ và tên: </strong></p>
+										<input style="width:60%;" class="stext-115 cl2 plh3 size-111 p-l-11 p-r-30"
+											ng-model="user.profile.fullname" type="text" placeholder="Nhập họ và tên">
+									</div>
+									<div class="bor8 m-b-20 how-pos4-parent d-flex">
+										<p style="padding: 10px 10px 0px 10px"><strong>Email: </strong></p>
+										<input style="width:60%;" class="stext-115 cl2 plh3 size-111 p-l-11 p-r-30"
+											ng-model="user.profile.email" type="email" placeholder="Nhập email">
+									</div>
+									<div class="bor8 m-b-20 how-pos4-parent d-flex">
+										<p style="padding: 10px 10px 0px 10px"><strong>Số điện thoại: </strong></p>
+										<input style="width:60%;" class="stext-115 cl2 plh3 size-111 p-l-11 p-r-30"
+											ng-model="user.profile.phone" type="text" placeholder="Nhập số điện thoại">
+									</div>
+								</div>
+							</div>
+
+
+							<div class="bor8 m-b-20 how-pos4-parent">
+								<p style="padding: 10px 10px 0px 10px"><strong>Giới tính: </strong></p>
+								<div style="display: flex; padding:5px 30px 2px 11px">
+									<input class="" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+										ng-value="true" ng-model="user.profile.gender">
+									<label style="margin: 0 30px 0 12px" for="inlineRadio1">Nam</label>
+								</div>
+								<div style="display: flex; padding:5px 30px 12px 11px">
+									<input class="" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+										ng-value="false" ng-model="user.profile.gender">
+									<label style="margin: 0 30px 0 12px" for="inlineRadio2">Nữ</label>
+								</div>
+							</div>
+							<div class="flex-w flex-r p-t-18 p-b-15 p-lr-15-sm">
+								<button ng-click="user.update()" type="submit"
+									class="flex-c-m m-r-8 mtext-108 cl0 size-40 bg3 bor1 hov-btn3 p-lr-20 p-tb-6 trans-04 pointer">
+									<i class="fa fa-pencil m-r-5" aria-hidden="true"></i>Cập nhật
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+		<script src="/js/shopping-cart-app.js"></script>
+		<!--===============================================================================================-->
+		<script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
+		<!--===============================================================================================-->
+		<script src="/vendor/animsition/js/animsition.min.js"></script>
+		<script src="/vendor/bootstrap/js/popper.js"></script>
+		<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+		<!--===============================================================================================-->
+		<script src="/vendor/select2/select2.min.js"></script>
+		<script>
+			$(".js-select2").each(function () {
+				$(this).select2({
+					minimumResultsForSearch: 20,
+					dropdownParent: $(this).next('.dropDownSelect2')
+				});
+			})
+		</script>
+		<!--===============================================================================================-->
+		<script src="/vendor/daterangepicker/moment.min.js"></script>
+		<script src="/vendor/daterangepicker/daterangepicker.js"></script>
+		<!--===============================================================================================-->
+		<script src="/vendor/slick/slick.min.js"></script>
+		<script src="/js/slick-custom.js"></script>
+		<!--===============================================================================================-->
+		<script src="/vendor/parallax100/parallax100.js"></script>
+		<script>
+			$('.parallax100').parallax100();
+		</script>
+		<!--===============================================================================================-->
+		<script src="/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+		<script>
+			$('.gallery-lb').each(function () { // the containers for all your galleries
+				$(this).magnificPopup({
+					delegate: 'a', // the selector for gallery item
+					type: 'image',
+					gallery: {
+						enabled: true
+					},
+					mainClass: 'mfp-fade'
+				});
+			});
+		</script>
+		<!--===============================================================================================-->
+		<script src="/vendor/isotope/isotope.pkgd.min.js"></script>
+		<!--===============================================================================================-->
+		<script src="/vendor/sweetalert/sweetalert.min.js"></script>
+		<script>
+			$('.js-addwish-b2, .js-addwish-detail').on('click', function (e) {
+				e.preventDefault();
+			});
+
+			$('.js-addwish-b2').each(function () {
+				var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+				$(this).on('click', function () {
+					swal(nameProduct, "is added to wishlist !", "success");
+
+					$(this).addClass('js-addedwish-b2');
+					$(this).off('click');
+				});
+			});
+
+			$('.js-addwish-detail').each(function () {
+				var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+
+				$(this).on('click', function () {
+					swal(nameProduct, "is added to wishlist !", "success");
+
+					$(this).addClass('js-addedwish-detail');
+					$(this).off('click');
+				});
+			});
+
+			/*---------------------------------------------*/
+
+			$('.js-addcart-detail').each(function () {
+				var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+				$(this).on('click', function () {
+					swal(nameProduct, "is added to cart !", "success");
+				});
+			});
+
+		</script>
+		<!--===============================================================================================-->
+		<script src="/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+		<script>
+			$('.js-pscroll').each(function () {
+				$(this).css('position', 'relative');
+				$(this).css('overflow', 'hidden');
+				var ps = new PerfectScrollbar(this, {
+					wheelSpeed: 1,
+					scrollingThreshold: 1000,
+					wheelPropagation: false,
+				});
+
+				$(window).on('resize', function () {
+					ps.update();
+				})
+			});
+		</script>
+		<!--===============================================================================================-->
+		<script src="/js/main.js"></script>
+
+	</main>
+
+</body>
+
+</html>

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Home 03</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="/images/icons/favicon.png" />
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="/fonts/linearicons-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="/vendor/animate/animate.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="/css/util.css">
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="stylesheet" href="/css/editinfo/editinfo.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"
+	type="text/javascript"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular-route.js"
+	type="text/javascript"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body class="animsition" ng-app="shopping-cart-app" ng-controller="shopping-cart-ctrl">
+	<main ng-controller="address-ctrl">
+	<div>
+		<header class="header_area">
+			<!-- Top menu -->
+			<div th:replace="/layout/header.html"></div>
+		</header>
+		
+		<div th:replace="/layout/cart.html"></div>
+	</div>
+	<div th:replace="/layout/cart.html"></div>
+	<section class="bg0 p-t-120 p-b-60" >
+		<div ng-controller="order-ctrl">
+			<div style="background-color: #fafafa;"
+				class="container p-lr-35 p-tb-20">
+				<div class="d-flex align-items-center m-b-10">
+					<i style="font-size: 26px;" class="fa fa-map-marker m-r-10"
+						aria-hidden="true"></i> <span class="mtext-113">Địa chỉ
+						nhận hàng</span>
+				</div>
+				<div class="d-flex align-items-center">
+					<strong class="m-r-50 text-dark">{{addressIsSelect.fullname}}
+						({{addressIsSelect.phonenumber}})</strong>
+					<div class="m-r-50">{{addressIsSelect.streetname}},
+						{{addressIsSelect.ward.wardname}},
+						{{addressIsSelect.district.districtname}},
+						{{addressIsSelect.province.provincename}}</div>
+					<a data-toggle="modal" data-target="#staticBackdrop" style="color: #717fe0;" class="">Thay đổi</a>
+				</div>
+			</div>
+
+			<!-- Shoping Cart -->
+			<div class="container m-t-30 p-lr-35 p-tb-20"
+				style="background-color: #fafafa;">
+				<div>
+					<i style="font-size: 26px;" class="fa fa-cube m-r-4"
+						aria-hidden="true"></i> <span class="mtext-113">Sản phẩm</span>
+				</div>
+				<div class="row mt-4">
+					<div class="col-lg-10 col-xl-12 m-lr-auto m-b-10 ">
+						<div class="m-lr-0-xl ">
+							<div class="wrap-table-shopping-cart ">
+								<table class="table-shopping-cart">
+									<tr class="table_head ">
+										<th class="column-1 "></th>
+										<th class="column-2 ">Tên sản phẩm</th>
+										<th class="column-3 ">Giá</th>
+										<th class="column-4 text-center ">Số lượng</th>
+										<th class="column-5 ">Tổng</th>
+									</tr>
+
+									<tr style="height: 100px" class="table_row "
+										ng-repeat="item in cart.listCarts">
+										<td class="column-1 pb-0">
+											<div class="how-itemcart1 ">
+												<img src="/images/products/{{item.product.productid}}/index1.jpg" alt="IMG ">
+											</div>
+										</td>
+										<td class="column-2 pb-0">{{item.product.productname}}</td>
+										<td class="column-3 pb-0">{{item.product.price | number: 0}}đ</td>
+										<td class="column-4 pb-0 text-center">
+											{{item.quantity}}
+										</td>
+										<td class="column-5 pb-0">{{cart.amount | number: 0}}đ</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="d-flex flex-row-reverse m-t-10 mtext-101">
+					<div class="m-l-40">
+						<a ng-click="shipMethod.click()" href="" class="cl1 ">Chọn voucher</a>
+					</div>
+					<div class="">
+						<i class="fa fa-money" aria-hidden="true"></i> Voucher của Shop
+					</div>
+				</div>
+			</div>
+
+			<div class="container m-t-30 p-lr-35 p-tb-20 m-b-50"
+				style="background-color: #fafafa;">
+				<div class="d-flex align-items-center justify-content-between">
+					<div class="">
+						<i style="font-size: 26px;" class="fa fa-bus m-r-10"
+							aria-hidden="true"></i> <span class="mtext-113">Phương
+							thức thanh toán</span>
+					</div>
+					<div style="width: 325px">
+						<div ng-if="shipMethod.isViewMethodShip" class="justify-content-end d-flex">
+							<div class="mtext-101">{{shipMethod.methodShip.name}}</div>
+							<a ng-click="shipMethod.changeMethodShip()" style="color: #717fe0;" class="mtext-101 m-l-50">Thay đổi</a>
+						</div>
+						
+						<div ng-if="!shipMethod.isViewMethodShip">
+							<div ng-repeat="mt in shipMethod.listMethodShip" class="d-flex justify-content-between ">
+								<div class="mtext-101">
+									<label for="1">{{mt.name}}</label> 
+								</div>
+								<input ng-click="shipMethod.changeMethodShip(mt)" ng-model="shipMethod.methodShip" ng-value="mt" id="mt.name" type="radio">
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+
+				<div class="d-flex justify-content-end">
+					<div ng-if="shipMethod.methodShip.id==2" style="width: 70%;" class="">
+						<paypal-buttons props="opts"></paypal-buttons>
+					</div>
+					<div style="width: 26%;" class="">
+						<div class="d-flex justify-content-between m-t-10">
+							<div class="mtext-102">Tổng tiền hàng</div>
+							<div class="mtext-102">{{cart.amount|number:0}}đ</div>
+						</div>
+						<div class="d-flex justify-content-between m-t-20">
+							<div class="mtext-102">Phí vận chuyển</div>
+							<div class="mtext-102">{{ship.fee| number:0 }}đ</div>
+						</div>
+						<div class="d-flex justify-content-between m-t-20">
+							<div class="mtext-102">Voucher</div>
+							<div class="mtext-102">43.000đ</div>
+						</div>
+						<div class="d-flex justify-content-between m-t-20">
+							<div class="mtext-102">Tổng thanh toán</div>
+							<div class="mtext-102" id="sumprice">{{cart.amount + ship.fee | number:0 }}đ</div>
+						</div>
+					</div>
+				</div>
+				<div class=" flex-w flex-r p-t-18 p-b-15 p-lr-15-sm ">
+					<button style="width: 26%;" type="submit" ng-click="order.purchase()"
+						class="flex-c-m mtext-108 cl0 size-40 bg3 hov-btn3 p-lr-20 p-tb-6 trans-04 pointer ">Đặt hàng</button>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div th:replace="/layout/footer.html"></div>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="staticBackdrop" data-backdrop="static"
+		data-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div ng-if="orderAddress.isEdit" class="modal-content">
+				<div class="modal-body">
+					<h4 class="p-b-10">Cập nhật địa chỉ</h4>
+					<div class="row">
+						<div class="col-6">
+							<div class="m-b-20 how-pos4-parent">
+								<p class="stext-113" style="padding: 10px 10px 0px 0px">
+									<strong>Họ và tên người nhận: </strong>
+								</p>
+								<input style="height: 26px; border-bottom: 1px solid;"
+									class="stext-113 cl2 plh3 size-111" type="text"
+									ng-model="address.fullname" placeholder="Nhập tên người nhận">
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="m-b-20 how-pos4-parent">
+								<p class="stext-113" style="padding: 10px 10px 0px 0px">
+									<strong>Số điện thoại: </strong>
+								</p>
+								<input style="height: 26px; border-bottom: 1px solid;"
+									class="stext-113 cl2 plh3 size-111" type="text"
+									ng-model="address.phonenumber" placeholder="Nhập số điện thoại">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-4">
+							<div class=" m-b-20 how-pos4-parent">
+								<p class="stext-113" style="padding: 10px 10px 0px 0px">
+									<strong>Tỉnh / Thành phố: </strong>
+								</p>
+								<select style="height: 34px;width:100%" id="" class="stext-111 cl2 "
+									ng-change="viewDistrict.selectProvince()"
+									ng-model="address.province.provinceid">
+									<option ng-value="0">Chọn tỉnh / thành phố</option>
+									<option ng-repeat="p in Provinces | orderBy : 'provincename'"
+										ng-value="p.provinceid">{{p.provincename}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-4">
+							<div class=" m-b-20 how-pos4-parent">
+								<p class="stext-113" style="padding: 10px 10px 0px 0px">
+									<strong>Quận / Huyện: </strong>
+								</p>
+								<select style="height: 34px;width:100%" id="" class="stext-111 cl2 "
+									ng-change="viewWard.selectDistrict()"
+									ng-model="address.district.districtid">
+									<option ng-value="0">Chọn quận / huyện</option>
+									<option ng-repeat="d in Districts | orderBy : 'districtname'"
+									 ng-value="d.districtid">{{d.districtname}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-4">
+							<div class=" m-b-20 how-pos4-parent">
+								<p class="stext-113" style="padding: 10px 10px 0px 0px">
+									<strong>Phường / Xã: </strong>
+								</p>
+								<select style="height: 34px;width:100%" id="" class="stext-111 cl2 "
+									ng-model="address.ward.wardid">
+									<option ng-value="0">Chọn phường / xã</option>
+									<option ng-repeat="w in Wards | orderBy : 'wardname'" ng-value="w.wardid">{{w.wardname}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="m-b-20 how-pos4-parent">
+								<p class="stext-113" style="padding: 10px 10px 0px 0px">
+									<strong>Địa chỉ: </strong>
+								</p>
+								<input style="height: 26px; border-bottom: 1px solid;"
+									class="stext-113 cl2 plh3 size-111" type="text"
+									ng-model="address.streetname"
+									placeholder="Nhập số nhà và tên đường">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<iframe
+								src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.685436117716!2d106.63305511471899!3d10.835367292281555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752978b39f8f73%3A0xed9b3cd640dda266!2zMjIxIFBoYW4gSHV5IMONY2gsIFBoxrDhu51uZyAxMiwgR8OyIFbhuqVwLCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1665811301363!5m2!1svi!2s"
+								width="100%" height="250" style="border: 0;" allowfullscreen=""
+								loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" style="border-radius: 0;"
+						class=" btn hov3 bg-none" ng-click="orderAddress.isEdit = false">Trở lại</button>
+					<button ng-click="orderAddress.finish()" type="button"
+						style="border-radius: 0;" class=" btn bg1 text-white">Hoàn thành</button>
+				</div>
+			</div>
+			
+			<div ng-if="!orderAddress.isEdit" class="modal-content">
+				<div class="modal-body">
+					<div class="d-flex justify-content-between align-items-center">
+						<h4 class="mtext-112 cl2">Địa chỉ của tôi</h4>
+						<button type="submit" class="flex-c-m m-r-8 mtext-101 cl0 size-102 bg3 hov-btn3 p-lr-12 trans-04 pointer"
+							ng-click="orderAddress.createAddress()">
+							<i class="fa fa-plus m-r-5" aria-hidden="true"></i>Thêm địa chỉ
+							mới
+						</button>
+					</div>
+					<div ng-repeat="addr in Addresses | orderBy : isdefault : false">
+							<div class="d-flex justify-content-between m-tb-20 align-items-end">
+								<div class="">
+									<h5 class="m-b-6 cl5">{{addr.fullname}}</h5>
+									<p>{{addr.streetname}}, {{addr.ward.wardname}},
+										{{addr.district.districtname}},
+										{{addr.province.provincename}}</p>
+								</div>
+								<div class="d-flex flex-column align-items-end">
+									<div class="">
+										<a class="m-r-6" href="#" ng-click="orderAddress.updateAddress(addr)">Cập nhật</a>
+									</div>
+									<button ng-if="!addr.isdefault" ng-click="orderAddress.changDefault(addr)"
+										class="bor20 m-t-10 p-all-3 bg-none">Chọn địa chỉ</button>
+									<button ng-if="addr.isdefault"
+										class="bor20 op-06 select m-t-10 p-all-3 bg-none">Địa chỉ nhận </button>
+								</div>
+							</div>
+							<hr>
+						</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" data-dismiss="modal" data-target="#staticBackdrop"
+						style="border-radius: 0;" class=" btn bg1 text-white">Xong</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="https://www.paypal.com/sdk/js?client-id=ATJ3U6H90acqBlX14alwUaK7YX6yOvBQ8GvdjUud_divzaNS7D7oIhFRz39pGMNMqMkSNioASgPNO3Vm"></script>
+	<!-- <script>
+		
+		paypal.Buttons({
+		  // Sets up the transaction when a payment button is clicked
+		  createOrder: (data, actions) => {
+			return actions.order.create({
+			  purchase_units: [{
+				amount: {
+				  value: '77.44' // Can also reference a variable or function
+				}
+			  }]
+			});
+		  },
+		  // Finalize the transaction after payer approval
+		  onApprove: (data, actions) => {
+			return actions.order.capture().then(function(orderData) {
+			  // Successful capture! For dev/demo purposes:
+			  console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+			  const transaction = orderData.purchase_units[0].payments.captures[0];
+			  alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+			  // When ready to go live, remove the alert and show a success message within this page. For example:
+			  // const element = document.getElementById('paypal-button-container');
+			  // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+			  // Or go to another URL:  actions.redirect('thank_you.html');
+			});
+		  }
+		}).render('#paypal-button-container');
+	  </script> -->
+	<!-- <script>
+		paypal.Buttons({
+			createOrder: function(data,acctions){
+				return actions.order.create({
+					intent: 'Thanh toán',
+					// payer: {
+					// 	name: $scope.account.fullname,
+
+					// 	address: {
+					// 		address_line_1: "",
+					// 		address_line_2: "",
+					// 		admin_area_2:"",
+					// 		admin_area_1:"",
+					// 		postal_code: "",
+					// 		country_code: ""
+					// 	},
+
+					// 	email_address: "",
+
+					// 	phone: {
+					// 		phone_type: "MOBILE",
+					// 		phone_number: {
+					// 			national_number: ""
+					// 		}
+					// 	}
+					// },
+					purchase_units: [{
+						amount: {
+							value: '299.99',
+							currency_code: "VND"
+						}
+					}]
+
+				});
+			}
+			// onApprove: function(data,actions){
+			// 	return actions.order.capture().then(function(details){
+			// 		console.log(details);
+			// 		orderId = details.id;
+			// 		status = details.status;
+			// 		alert("Thành công")
+			// 	});
+			// },
+			// onCancel: function(data){
+			// 	alert("Giao dịch bị hủy");
+			// },
+			// onError: function(err){
+			// 	alert("Lỗi");
+			// }
+		}).render("#paypal-button-container");
+	</script> -->
+	<script src="/js/shopping-cart-app.js"></script> <!--===============================================================================================-->
+	<script src="/vendor/jquery/jquery-3.2.1.min.js"></script> <!--===============================================================================================-->
+	<script src="/vendor/animsition/js/animsition.min.js"></script> <script
+		src="/vendor/bootstrap/js/popper.js"></script> <script
+		src="/vendor/bootstrap/js/bootstrap.min.js"></script> <!--===============================================================================================-->
+	<script src="/vendor/select2/select2.min.js"></script> <script>
+			$(".js-select2").each(function () {
+				$(this).select2({
+					minimumResultsForSearch: 20,
+					dropdownParent: $(this).next('.dropDownSelect2')
+				});
+			})
+		</script> <!--===============================================================================================-->
+	<script src="/vendor/daterangepicker/moment.min.js"></script> <script
+		src="/vendor/daterangepicker/daterangepicker.js"></script> <!--===============================================================================================-->
+	<script src="/vendor/slick/slick.min.js"></script> <script
+		src="/js/slick-custom.js"></script> <!--===============================================================================================-->
+	<script src="/vendor/parallax100/parallax100.js"></script> <script>
+			$('.parallax100').parallax100();
+		</script> <!--===============================================================================================-->
+	<script src="/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+	<script>
+			$('.gallery-lb').each(function () { // the containers for all your galleries
+				$(this).magnificPopup({
+					delegate: 'a', // the selector for gallery item
+					type: 'image',
+					gallery: {
+						enabled: true
+					},
+					mainClass: 'mfp-fade'
+				});
+			});
+		</script> <!--===============================================================================================-->
+	<script src="/vendor/isotope/isotope.pkgd.min.js"></script> <!--===============================================================================================-->
+	<script src="/vendor/sweetalert/sweetalert.min.js"></script> <script>
+			$('.js-addwish-b2, .js-addwish-detail').on('click', function (e) {
+				e.preventDefault();
+			});
+	
+			$('.js-addwish-b2').each(function () {
+				var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+				$(this).on('click', function () {
+					swal(nameProduct, "is added to wishlist !", "success");
+	
+					$(this).addClass('js-addedwish-b2');
+					$(this).off('click');
+				});
+			});
+	
+			$('.js-addwish-detail').each(function () {
+				var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+	
+				$(this).on('click', function () {
+					swal(nameProduct, "is added to wishlist !", "success");
+	
+					$(this).addClass('js-addedwish-detail');
+					$(this).off('click');
+				});
+			});
+	
+			/*---------------------------------------------*/
+	
+			$('.js-addcart-detail').each(function () {
+				var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+				$(this).on('click', function () {
+					swal(nameProduct, "is added to cart !", "success");
+				});
+			});
+	
+		</script> <!--===============================================================================================-->
+	<script src="/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script>
+			$('.js-pscroll').each(function () {
+				$(this).css('position', 'relative');
+				$(this).css('overflow', 'hidden');
+				var ps = new PerfectScrollbar(this, {
+					wheelSpeed: 1,
+					scrollingThreshold: 1000,
+					wheelPropagation: false,
+				});
+	
+				$(window).on('resize', function () {
+					ps.update();
+				})
+			});
+		</script> <!--===============================================================================================-->
+	<script src="/js/main.js"></script> </main>
+</body>
+
+</html>

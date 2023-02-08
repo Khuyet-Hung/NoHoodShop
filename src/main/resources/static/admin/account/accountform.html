@@ -1,0 +1,234 @@
+<div class="col-12 grid-margin">
+	<div class="card">
+		<div class="card-body">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item" role="presentation">
+					<button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button"
+						role="tab" aria-controls="home" aria-selected="true">Thông tin</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button"
+						role="tab" aria-controls="profile" aria-selected="false">Danh sách</button>
+				</li>
+			</ul>
+			<p class="card-description">
+				Người dùng
+			</p>
+
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+					<form class="forms-sample" name="formdulieu">
+						<div class="row">
+							<div class="col-3 form-group">
+								<label for="id_img_account" style="display: block">
+									<img style="height: 300px;object-fit: cover;" class="pointer w-100"
+										ng-src="{{'../images/avatar/' + form.photo}}">
+								</label>
+								<input id="id_img_account" hidden class="form-control file-upload-info" type="file"
+									id="image" onchange="angular.element(this).scope().imageChanged(this.files)"
+									accept="image/*">
+							</div>
+							<div class="col-8 form-group">
+								<label for="exampleInputName1"><img class="how-pos4 pointer-none"
+										src="/images/icons/sport_clothes_24px.png" alt="ICON"> Tài khoản</label>
+								<input type="text" ng-model="form.username" name="user" ng-minlength="4"
+									placeholder="Nhập tài khoản" class="form-control" required /><br>
+								<div ng-show="formdulieu.user.$dirty || formdulieu.$submitted">
+									<span class="badge badge-danger font-italic"
+										ng-show="formdulieu.user.$error.minlength">
+										Nhập tài khoản từ 4 ký tự trở lên</span>
+									<span class="badge badge-danger font-italic"
+										ng-show="formdulieu.user.$error.required">
+										Tài khoản không được rỗng</span>
+								</div><br>
+
+								<label for="exampleInputEmail3"><img class="how-pos4 pointer-none"
+										src="/images/icons/price_24px.png" alt="ICON"> Họ và tên</label>
+								<input type="text" ng-model="form.fullname" ng-minlength="4" placeholder="Nhập họ tên"
+									class="form-control" name="hoten" required /><br>
+								<div ng-show="formdulieu.hoten.$dirty || formdulieu.$submitted">
+									<span class="badge badge-danger font-italic"
+										ng-show="formdulieu.hoten.$error.minlength || formdulieu.hoten.$error.maxlength">
+										Nhập họ và tên từ 4 ký tự trở lên</span>
+									<span class="badge badge-danger font-italic"
+										ng-show="formdulieu.hoten.$error.required">
+										Họ và tên không được rỗng</span>
+								</div>
+								<br>
+								<label for="exampleInputPassword4"><img class="how-pos4 pointer-none"
+										src="/images/icons/Numbers_24px.png" alt="ICON"> Mật khẩu</label>
+								<input type="password" name="matkhau" ng-model="form.password" ng-minlength="6"
+									placeholder="Nhập mật khẩu" class="form-control" required /><br>
+								<div ng-show="formdulieu.$submitted || formdulieu.matkhau.$dirty ">
+									<span class="badge badge-danger font-italic"
+										ng-show="formdulieu.matkhau.$error.minlength">
+										Nhập mật khẩu từ 6 ký tự trở lên</span>
+									<span class="badge badge-danger font-italic"
+										ng-show="formdulieu.matkhau.$error.required">
+										Mật khẩu không được rỗng</span>
+								</div>
+								<br>
+
+
+							</div>
+
+						</div>
+
+						<div class="form-group">
+							<label><img class="how-pos4 pointer-none" src="/images/icons/Email Sign_24px.png"
+									alt="ICON"> Địa chỉ email</label>
+							<input type="email" ng-model="form.email"
+								pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" name="mail"
+								class="form-control" placeholder="Nhập email" required /><br>
+							<div ng-show="formdulieu.mail.$dirty || formdulieu.$submitted">
+								<span class="badge badge-danger font-italic" ng-show="formdulieu.mail.$error.pattern">
+									Vui lòng nhập đúng định dạng email (VD: user@gmail.com)</span>
+								<span class="badge badge-danger font-italic" ng-show="formdulieu.mail.$error.required">
+									Email không được rỗng</span>
+							</div>
+
+						</div>
+						<div class="form-group">
+							<label><img class="how-pos4 pointer-none" src="/images/icons/Email Sign_24px.png"
+									alt="ICON"> Số điện thoại</label>
+							<input type="tel" ng-model="form.phone" name="sdt" class="form-control" ng-minlength="10"
+								ng-maxlength="10" placeholder="Nhập số điện thoại" required /><br>
+							<div ng-show="formdulieu.sdt.$dirty || formdulieu.$submitted">
+<<<<<<< HEAD
+								<span class="badge badge-danger font-italic"
+									ng-show="formdulieu.sdt.$error.minlength || formdulieu.sdt.$error.maxlength">
+=======
+								<span class="badge badge-danger font-italic" ng-show="formdulieu.sdt.$error.minlength || formdulieu.sdt.$error.maxlength">
+>>>>>>> e3aec8210b585782a42122bde262f66d8076c7d1
+									Nhập số điện thoại với 10 ký tự</span>
+								<span class="badge badge-danger font-italic" ng-show="formdulieu.sdt.$error.required">
+									Số điện thoại không được rỗng</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label><img class="how-pos4 pointer-none" src="/images/icons/Email Sign_24px.png"
+									alt="ICON"> Giới tính</label>
+							<div class="form-group clearfix">
+								<div class="icheck-primary d-inline">
+									<input type="radio" id="radioPrimary1" required ng-value="true"
+										ng-model="form.gender" name="gender" checked>
+									<label for="radioPrimary1"> Nam
+									</label>
+								</div>
+								<div class="icheck-primary d-inline">
+									<input type="radio" id="radioPrimary2" required ng-value="false"
+										ng-model="form.gender" name="gender">
+									<label for="radioPrimary2"> Nữ
+									</label>
+								</div>
+								<div ng-show="formdulieu.user.$dirty || formdulieu.$submitted">
+									<span class="badge badge-danger font-italic"
+										ng-show="formdulieu.gender.$error.required">
+										Vui lòng chọn giới tính</span>
+								</div>
+							</div>
+						</div>
+						<div class="flex-w flex-r p-t-18 p-b-15 p-lr-15-sm">
+							<button type="submit" ng-disabled="formdulieu.$invalid" ng-show="nutupdate == false"
+								ng-click="create()" class="btn btn-primary mr-2">
+								Thêm</button>
+							<button type="submit" ng-disabled="formdulieu.$invalid" ng-show="nutupdate == true"
+								ng-click="update()" class="btn btn-primary mr-2">
+								Cập nhật</button>
+							<button ng-click="reset()" class="btn btn-light">
+								Bỏ qua</button>
+						</div>
+					</form>
+
+				</div>
+				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+					<div class="row">
+						<div class="col-9">
+							<h4 class="mtext-105 cl2 txt-center p-b-30">Dữ liệu</h4>
+						</div>
+						<div class="col-3">
+							<input type="text" class="form-control" placeholder="Tìm kiếm" ng-model="searchAccount">
+						</div>
+					</div>
+					<br>
+
+
+
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th scope="col">Tài khoản</th>
+								<th scope="col">Họ và tên</th>
+								<th scope="col">Giới tính</th>
+								<th scope="col">Email</th>
+
+
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="item in pager.items | filter: searchAccount">
+								<th scope="row">{{item.username}}</th>
+								<td>{{item.fullname}}</td>
+								<td>{{item.gender?'Nam':'Nữ'}}</td>
+								<td>{{item.email}}</td>
+
+								<td class="column-8">
+									<div class="btn-group btn-group-xs">
+										<button ng-click="edit(item)"
+											class="btn btn-warning glyphicon glyphocon-edit">Sửa</button>
+										<button ng-click="delete(item)"
+											class="btn btn-danger glyphicon glyphocon-trash">Xóa</button>
+									</div>
+								</td>
+							</tr>
+
+						</tbody>
+					</table>
+					<br>
+					<nav aria-label="Page navigation example" class="d-flex justify-content-center">
+						<ul class="pagination">
+<<<<<<< HEAD
+							<li class="page-item"><a class="page-link" ng-click="pager.first()">
+									<< </a>
+							</li>
+						</ul>
+						<ul class="pagination">
+							<li class="page-item"><a class="page-link" ng-click="pager.prev()">
+									< </a>
+							</li>
+						</ul>
+						<ul class="pagination">
+							<li class="page-item"><a style="padding: 0.5rem 0.75rem;display: block; cursor: default;">
+									{{pager.page + 1}} - {{pager.count}} đến {{pager.count}} </a></li>
+						</ul>
+
+						<ul class="pagination">
+							<li class="page-item"><a class="page-link" ng-click="pager.next()"> > </a></li>
+						</ul>
+						<ul class="pagination">
+							<li class="page-item"><a class="page-link" ng-click="pager.last()"> >> </a></li>
+=======
+						  <li class="page-item"><a class="page-link" ng-click="pager.first()"> << </a></li>
+						</ul>
+						<ul class="pagination">
+						  <li class="page-item"><a class="page-link" ng-click="pager.prev()"> < </a></li>
+						</ul>
+						<ul class="pagination">
+						  <li class="page-item"><a style="padding: 0.5rem 0.75rem;display: block; cursor: default;"> {{pager.page + 1}} - {{pager.count}} đến {{pager.count}} </a></li>
+						</ul>
+						
+						<ul class="pagination">
+						  <li class="page-item"><a class="page-link" ng-click="pager.next()"> > </a></li>
+						</ul>
+						<ul class="pagination">
+						  <li class="page-item"><a class="page-link" ng-click="pager.last()"> >> </a></li>
+>>>>>>> e3aec8210b585782a42122bde262f66d8076c7d1
+						</ul>
+					</nav>
+				</div>
+			</div>
+
+		</div>
+	</div>

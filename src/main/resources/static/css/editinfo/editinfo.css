@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+.dropdown-list {
+    /* display: none; */
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.5s ease;
+}
+
+
+#dropdown-input:checked~.dropdown-list {
+    height: calc(3 * 41px);
+}
+
+#dropdown-input:checked~.fa-angle-right::before {
+    content: "\f107" !important;
+}

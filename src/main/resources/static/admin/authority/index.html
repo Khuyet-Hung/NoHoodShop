@@ -1,0 +1,29 @@
+
+
+<div class="col-12 grid-margin">
+    <div class="card">
+        <div class="card-body">
+
+            <p class="card-description">
+                Phân quyền
+            </p>
+            <h4 class="mtext-105 cl2 txt-center p-b-30">Tài khoản</h4>
+            <table class="table table-border">
+                <thead class="bg-succes" style="font-variant: small-caps;">
+                    <tr>
+                        <th>CHỨC VỤ</th>
+                        <th ng-repeat="role in roles" class="text-center text-uppercase">{{role.rolename}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="acc in admins">
+                        <td>{{acc.username}}</td>
+                        <th ng-repeat="role in roles" class="text-center ">
+                            <input class="form-check-input m-auto" ng-checked="authority_of(acc,role)"
+                                ng-click="authority_changed(acc,role)" type="checkbox">
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>

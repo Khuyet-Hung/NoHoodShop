@@ -1,0 +1,190 @@
+<style>
+	.color {
+		background-color: #000000
+	}
+</style>
+<div class="col-12 grid-margin">
+	<div class="card">
+		<div class="card-body">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item" role="presentation">
+					<button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button"
+						role="tab" aria-controls="home" aria-selected="true">Thông tin</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button"
+						role="tab" aria-controls="profile" aria-selected="false">Danh sách</button>
+				</li>
+			</ul>
+			<p class="card-description">
+				Sản phẩm
+			</p>
+
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+					<form class="forms-sample" name="formdulieu">
+						<div class="row">
+							<div class="col-3 form-group">
+								<label style="display: block;" for="id_img_productup">
+									<img ng-if="form.image" style="height: 300px;object-fit: cover;"
+										class="pointer w-100"
+										ng-src="{{'/images/products/'+ form.productid + '/index1.png'}}">
+
+								</label>
+								<label style="display: block;" for="id_img_product">
+									<img ng-if="!form.image" style="height: 300px;object-fit: cover;"
+										class="pointer w-100" ng-src="{{'/images/products/'+ form.image}}">
+								</label>
+
+							</div>
+							<div class="col-8 form-group">
+								<div class="row mb-4">
+									<div class="col-6">
+										<input hidden type="text" ng-model="form.productid" placeholder="Mã sản phẩm"
+											class="form-control" />
+										<label for="exampleInputName1"><img class="how-pos4 pointer-none"
+												src="/images/icons/sport_clothes_24px.png" alt="ICON"> Tên sản
+											phẩm</label>
+										<input type="text" name="product" ng-minlength="6" ng-model="form.productname"
+											placeholder="Nhập sản phẩm" class="form-control" required /><br>
+										<div ng-show="formdulieu.product.$dirty  || formdulieu.$submitted">
+											<span class="badge badge-danger font-italic"
+												ng-show="formdulieu.product.$error.required">
+												Tên sản phẩm không được rỗng</span>
+											<span class="badge badge-danger font-italic"
+												ng-show="formdulieu.product.$error.minlength">
+												Nhập tên sản phẩm từ 6 ký tự trở lên</span>
+											<!-- <span class="badge badge-danger font-italic"
+													ng-show="formdulieu.macate.$error.pattern">
+													Chỉ nhập được kí tự chữ (A-Z)</span> -->
+										</div><br>
+									</div>
+									<div class="col-6">
+										<label for="exampleInputCity1"><img class="how-pos4"
+												src="/images/icons/account_24px.png" alt="ICON"> Thể loại</label>
+										<select ng-model="form.categories.cateid" class="form-control" name="chon" required>
+											<option ng-repeat="c in cates" ng-value="c.cateid">{{c.catename}}
+											</option>
+										</select><br>
+										<div ng-show="formdulieu.chon.$dirty || formdulieu.$submitted">
+											<span class="badge badge-danger font-italic"
+												ng-show="formdulieu.chon.$error.required">
+												Vui lòng chọn thể loại</span>
+										</div><br>
+									</div>
+								</div>
+								<div class="row mb-4">
+									<div class="col-6">
+										<label for="exampleInputEmail3"><img class="how-pos4 pointer-none"
+												src="/images/icons/price_24px.png" alt="ICON"> Giá tiền</label>
+										<input type="number" ng-model="form.price" name="gia" placeholder="Nhập giá"
+											class="form-control" ng-min="20000" required /><br>
+										<div ng-show="formdulieu.gia.$dirty  || formdulieu.$submitted">
+											<span class="badge badge-danger font-italic"
+												ng-show="formdulieu.gia.$error.required">
+												Giá tiền không được rỗng</span>
+											<span class="badge badge-danger font-italic"
+												ng-show="formdulieu.gia.$error.min ">
+												Giá tiền phải từ 20.000 trở lên</span>
+										</div><br>
+									</div>
+									<div class="col-6">
+										<label for="exampleInputPassword4"><img class="how-pos4 pointer-none"
+												src="/images/icons/Numbers_24px.png" alt="ICON"> Số lượng</label>
+										<input type="number" ng-model="form.quantity" name="sl" ng-min="1"
+											placeholder="Nhập số lượng" class="form-control" required /><br>
+										<div ng-show="formdulieu.$submitted || formdulieu.sl.$dirty">
+											<span class="badge badge-danger font-italic"
+												ng-show="formdulieu.sl.$error.required">
+												Số lượng không được rỗng</span>
+											<span class="badge badge-danger font-italic"
+												ng-show="formdulieu.sl.$error.min ">
+												Số lượng phải từ 1 trở lên</span>
+										</div><br>
+									</div>
+								</div>
+							</div>
+						</div>
+						<input hidden class="form-control file-upload-info" type="file" id="id_img_product" name="anh1" accept=".png" multiple >
+							
+							
+							
+						<input hidden class="form-control file-upload-info" type="file" id="id_img_productup" name="anh2" ng-model="anh2"
+							onchange="angular.element(this).scope().imageUpdated(this.files)" accept=".png" multiple >
+							
+							
+						<div class="flex-w flex-r p-t-18 p-b-15 p-lr-15-sm"> 
+							<button ng-disabled="formdulieu.$invalid" ng-show="nutthem == false" ng-click="create()" class="btn btn-primary mr-2">
+								Thêm</button>
+							<button type="submit" ng-disabled="formdulieu.$invalid" ng-show="nutupdate == true"  ng-click="update()" class="btn btn-primary mr-2">
+								Cập nhật</button>
+							<button ng-click="reset()" class="btn btn-light">
+								Bỏ qua</button>
+						</div>
+					</form>
+
+				</div>
+				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+					<div class="row">
+						<div class="col-9">
+							<h4 class="mtext-105 cl2 txt-center p-b-30">Dữ liệu</h4>
+						</div>
+						<div class="col-3">
+							<input type="text" class="form-control" placeholder="Tìm kiếm" ng-model="searchProduct">
+						</div>
+					</div>
+					<br>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th scope="col">Tên sản phẩm</th>
+								<th scope="col">Giá</th>
+								<th scope="col">Số lượng</th>
+								<th scope="col">Ngày sản xuất</th>
+								<th scope="col">Thể loại</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="item in pager.items | filter: searchProduct">
+								<td>{{item.productname}}</td>
+								<td>{{item.price | number: 0}}</td>
+								<td>{{item.quantity}}</td>
+								<td>{{item.datecreate | date: 'dd-MM-yyyy'}}</td>
+								<td>{{item.categories.catename}}</td>
+								<td class="column-8">
+									<div class="btn-group btn-group-xs">
+										<button ng-click="edit(item)"
+											class="btn btn-warning glyphicon glyphocon-edit">Sửa</button>
+										<button ng-click="delete(item)"
+											class="btn btn-danger glyphicon glyphocon-trash">Xóa</button>
+									</div>
+								</td>
+							</tr>
+
+						</tbody>
+					</table>
+					<br>
+					<nav aria-label="Page navigation example" class="d-flex justify-content-center">
+						<ul class="pagination">
+						  <li class="page-item"><a class="page-link" ng-click="pager.first()"> << </a></li>
+						</ul>
+						<ul class="pagination">
+						  <li class="page-item"><a class="page-link" ng-click="pager.prev()"> < </a></li>
+						</ul>
+						<ul class="pagination">
+						  <li class="page-item"><a style="padding: 0.5rem 0.75rem;display: block; cursor: default;"> {{pager.page + 1}} - {{pager.count}} đến {{pager.count}} </a></li>
+						</ul>
+						
+						<ul class="pagination">
+						  <li class="page-item"><a class="page-link" ng-click="pager.next()"> > </a></li>
+						</ul>
+						<ul class="pagination">
+						  <li class="page-item"><a class="page-link" ng-click="pager.last()"> >> </a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+
+		</div>
+	</div>

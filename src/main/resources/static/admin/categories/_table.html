@@ -1,0 +1,81 @@
+	<div class="container">
+    <div class="m-l-25 m-r--38 m-lr-0-xl">
+        <div class="wrap-table-shopping-cart">
+            <table class="table-shopping-cart">
+                <tr class="table_head">
+                    <th class="column-1">ID</th>
+                    <th class="column-2">NAME</th>
+                    <th class="column-8"></th>
+                </tr>
+
+                <tr class="table_row" ng-repeat="item in pager.items">
+                    <td class="column-1">{{item.id}}</td>
+                    <td class="column-2">{{item.name}}</td>
+                    <td class="column-8">
+                        <div class="btn-group btn-group-xs">
+                            <button ng-click="edit(item)" class="btn btn-warning glyphicon glyphocon-edit">Sửa</button>
+                            <button ng-click="delete(item)" class="btn btn-danger glyphicon glyphocon-trash">Xóa</button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="panel-footer text-center">
+                <button ng-click="pager.first()" class="btn btn-danger">
+                    <img src="/images/icon-prev.png" alt="">
+                </button>
+                <button ng-click="pager.prev()" class="btn btn-primary">
+                    <img src="/images/icon-prev.png" alt="">
+                </button>
+                <button class="btn btn-success">{{pager.page + 1}} or {{pager.count}}</button>
+                <button ng-click="pager.next()" class="btn btn-primary">
+                    <img src="/images/icon-next.png" alt="">
+                </button>
+                <button ng-click="pager.last()" class="btn btn-danger">
+                    <img src="/images/icon-next.png" alt="">
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="panel panel-default">
+    <div class="panel-heading">TABLE</div>
+    <table class="table table-condensed">
+        <thead class="bg-success" style="font-variant: small-caps;">
+            <tr>
+
+            </tr>
+        </thead>
+        <tbody ng-repeat="item in pager.items">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.price | number: 2}}</td>
+            <td>{{item.createDAte | date: 'dd-MM-yyyy'}}</td>
+            <td>{{item.image}}</td>
+            <td>{{item.category.name}}</td>
+            <td>{{item.available ? 'Yes' : 'No'}}</td>
+            <td>
+                <div class="btn-group btn-group-xs">
+                    <button ng-click="edit(item)" class="btn btn-warning glyphicon glyphocon-edit"></button>
+                    <button ng-click="delete(item)" class="btn btn-danger glyphicon glyphocon-trash"></button>
+                </div>
+            </td>
+        </tbody>
+    </table>
+    <div class="panel-footer text-center">
+        <button ng-click="pager.first()" class="btn btn-danger">
+            <b class="glyphicon glyphicon-hand-up"></b>
+        </button>
+        <button ng-click="pager.prev()" class="btn btn-primary">
+            <b class="glyphicon glyphicon-hand-left"></b>
+        </button>
+        <button class="btn btn-success">{{pager.page + 1}} or {{pager.count}}</button>
+        <button ng-click="pager.next()" class="btn btn-primary">
+            <b class="glyphicon glyphicon-hand-right"></b>
+        </button>
+        <button ng-click="pager.last()" class="btn btn-danger">
+            <b class="glyphicon glyphicon-hand-down"></b>
+        </button>
+    </div>
+</div> -->

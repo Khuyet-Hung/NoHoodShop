@@ -1,0 +1,103 @@
+<div class="col-10 m-auto">
+            <div class="container">
+                <div class="p-b-80">
+                    <div class="row justify-content-end">
+                        <button class="btn btn-danger" ng-click="update()">Cập nhật danh sách địa chỉ</button>
+                    </div>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Danh sách tỉnh / thành phố</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Danh sách quận / huyện</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Danh sách phường / xã</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <h5 class="m-tb-20 cl5 mtext-102">Tổng số lượng tỉnh / thành phố : {{Provinces.length}}</h5>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">STT</th>
+                                        <th scope="col">Mã tỉnh / thành phố</th>
+                                        <th scope="col">Tên tỉnh / thành phố</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="p in Provinces | limitTo : viewProvince.limitNumber : 0">
+                                        <th scope="row">{{$index + 1}}</th>
+                                        <td>{{p.provinceid}}</td>
+                                        <td>{{p.provincename}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="text-center">	
+                            	<button id="hideOrView" class="btn btn-warning" ng-click="viewProvince.hideOrView()">Xem tất cả</button>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="m-tb-20 cl5 mtext-102"> Số lượng quận / huyện : {{Districts.length}}</h5>
+                                <select style="height: 34px;" id="" class="stext-111 cl2 " ng-change="viewDistrict.view()"
+                                ng-options="p as p.provincename for p in Provinces | orderBy : 'provincename'" ng-model="selectedItem">
+									<option value="">Chọn tỉnh / thành phố</option>
+									<option>{{p.provincename}}</option>
+								</select>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                    <tr >
+                                        <th scope="col">STT</th>
+                                        <th scope="col">Mã quận / huyện</th>
+                                        <th scope="col">Tên quận / huyện</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="d in Districts">
+                                        <th scope="row">{{$index}}</th>
+                                        <td>{{d.districtid}}</td>
+                                        <td>{{d.districtname}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="m-tb-20 cl5 mtext-102">Số lượng phường / xã : {{Wards.length}}</h5>
+                                <div class="">
+                                    <select style="height: 34px;" id="" class="stext-111 cl2 " ng-change="viewWard.selectProvice()"
+                                		ng-options="p as p.provincename for p in Provinces | orderBy : 'provincename'" ng-model="selectedProvice">
+										<option value="">Chọn tỉnh / thành phố</option>
+										<option>{{p.provincename}}</option>
+									</select>
+                                    <select style="height: 34px;" id="" class="stext-111 cl2 " ng-change="viewWard.selectDistrict()"
+                                		ng-options="d as d.districtname for d in viewWard.districts | orderBy : 'districtname'" ng-model="selectedDistrict">
+										<option value="">Chọn tỉnh / thành phố</option>
+										<option>{{d.districtname}}</option>
+									</select>
+                                </div>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">STT</th>
+                                        <th scope="col">Mã phường / xã</th>
+                                        <th scope="col">Tên phường / xã</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="w in Wards">
+                                        <th scope="row">{{$index}}</th>
+                                        <td>{{w.wardid}}</td>
+                                        <td>{{w.wardname}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

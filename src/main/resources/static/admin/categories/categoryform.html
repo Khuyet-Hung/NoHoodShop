@@ -1,0 +1,143 @@
+<div class="col-12 grid-margin">
+	<div class="card">
+		<div class="card-body">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item" role="presentation">
+					<button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button"
+						role="tab" aria-controls="home" aria-selected="true">Thông tin</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button"
+						role="tab" aria-controls="profile" aria-selected="false">Danh sách</button>
+				</li>
+			</ul>
+			<p class="card-description">
+				Loại sản phẩm
+			</p>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+					<form class="forms-sample" name="formdulieu">
+
+						<div class="form-group">
+							<label for="exampleSelectGender"><img class="how-pos4 pointer-none"
+									src="/images/icons/Email Sign_24px.png" alt="ICON"> Loại sản phẩm</label>
+
+							<input class="form-control" ng-minlength="4" ng-maxlength="10" pattern="[A-Za-z]{1,}"
+								type="text" name="macate" ng-model="form.cateid" placeholder="Nhập mã thể loại"
+								required>
+							<br>
+							<div ng-show="formdulieu.macate.$dirty || formdulieu.$submitted">
+								<span class="badge badge-danger font-italic"
+									ng-show="formdulieu.macate.$error.minlength || formdulieu.macate.$error.maxlength "> Nhập
+									tên thể loại từ 4 đến 10 ký tự</span>
+								<span class="badge badge-danger font-italic" ng-show="formdulieu.macate.$error.pattern">
+									Chỉ nhập được kí tự chữ (A-Z)</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label><img class="how-pos4 pointer-none" src="/images/icons/password_24px.png" alt="ICON">
+								Tên sản phẩm</label>
+							<input class="form-control" type="text" ng-minlength="4" ng-maxlength="50"
+								ng-model="form.catename" name="tentl" placeholder="Nhập tên thể loại" required><br>
+							<div ng-show="formdulieu.tentl.$dirty || formdulieu.$submitted">
+								<span class="badge badge-danger font-italic"
+									ng-show="formdulieu.tentl.$error.minlength || formdulieu.tentl.$error.maxlength "> Nhập
+									tên thể loại từ 4 đến 50 ký tự</span>
+
+							</div>
+
+						</div>
+						<div class="flex-w flex-r p-t-18 p-b-15 p-lr-15-sm">
+							<button ng-click="create()" ng-disabled="formdulieu.$invalid" ng-show="nutupdate == false"
+								class="btn btn-primary mr-2">
+								 Thêm</button>
+							<button ng-click="update()" ng-disabled="formdulieu.$invalid" ng-show="nutupdate == true"
+								class="btn btn-primary mr-2">
+								 Cập nhật</button>
+							<button ng-click="reset()" class="btn btn-light">
+								 Bỏ qua</button>
+						</div>
+					</form>
+				</div>
+				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+					<div class="row">
+						<div class="col-9">
+							<h4 class="mtext-105 cl2 txt-center p-b-30">Dữ liệu</h4>
+						</div>
+						<div class="col-3">
+							<input type="text" class="form-control" placeholder="Tìm kiếm" ng-model="searchCategory">
+						</div>
+					</div>
+					<br>
+					<table id="example" class="table table-bordered">
+						<thead>
+							<tr class="table_head">
+								<th ng-click="sortdata('cateid')" class="column-1 th-sm">Mã thể loại <i ng-class="getSortclass('cateid')"></i></th>
+								<th ng-click="sortdata('catename')" class="column-2 th-sm">Tên thể loại <i ng-class="getSortclass('catename')"></i></th>
+								<th class="column-8"></th>
+							</tr>
+						</thead>
+
+
+						<tbody>
+							<tr class="table_row" ng-repeat="item in pager.items | filter: searchCategory | orderBy: sortColumn : sort">
+								<td class="column-1">{{item.cateid}}</td>
+								<td class="column-2">{{item.catename}}</td>
+								<td class="column-8">
+									<div class="btn-group btn-group-xs">
+										<button ng-click="edit(item)"
+											class="btn btn-warning glyphicon glyphocon-edit">Sửa</button>
+										<button ng-click="delete(item)"
+											class="btn btn-danger glyphicon glyphocon-trash">Xóa</button>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+
+					</table>
+					<br>
+					<nav aria-label="Page navigation example" class="d-flex justify-content-center">
+						<ul class="pagination">
+<<<<<<< HEAD
+							<li class="page-item"><a class="page-link" ng-click="pager.first()">
+									<< </a>
+							</li>
+						</ul>
+						<ul class="pagination">
+							<li class="page-item"><a class="page-link" ng-click="pager.prev()">
+									< </a>
+							</li>
+						</ul>
+						<ul class="pagination">
+							<li class="page-item"><a style="padding: 0.5rem 0.75rem;display: block; cursor: default;">
+									{{pager.page + 1}} - {{pager.count}} đến {{pager.count}} </a></li>
+						</ul>
+
+						<ul class="pagination">
+							<li class="page-item"><a class="page-link" ng-click="pager.next()"> > </a></li>
+						</ul>
+						<ul class="pagination">
+							<li class="page-item"><a class="page-link" ng-click="pager.last()"> >> </a></li>
+=======
+						  <li class="page-item"><a class="page-link" ng-click="pager.first()"> << </a></li>
+						</ul>
+						<ul class="pagination">
+						  <li class="page-item"><a class="page-link" ng-click="pager.prev()"> < </a></li>
+						</ul>
+						<ul class="pagination">
+						  <li class="page-item"><a style="padding: 0.5rem 0.75rem;display: block; cursor: default;"> {{pager.page + 1}} - {{pager.count}} đến {{pager.count}} </a></li>
+						</ul>
+						
+						<ul class="pagination">
+						  <li class="page-item"><a class="page-link" ng-click="pager.next()"> > </a></li>
+						</ul>
+						<ul class="pagination">
+						  <li class="page-item"><a class="page-link" ng-click="pager.last()"> >> </a></li>
+>>>>>>> e3aec8210b585782a42122bde262f66d8076c7d1
+						</ul>
+					</nav>
+				</div>
+			</div>
+
+		</div>
+	</div>

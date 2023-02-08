@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+
+<head>
+	<title>Quên mật khẩu</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--===============================================================================================-->
+</head>
+
+<body class="animsition" ng-app="shopping-cart-app" ng-controller="shopping-cart-ctrl">
+	<main ng-controller="forget-pass-ctrl">
+		<!-- Sidebar -->
+		<header class="header_area">
+			<!-- Top menu -->
+			<div th:replace="/layout/header.html">
+	
+			</div>
+		</header>
+
+		<!-- Cart -->
+		<div th:replace="/layout/cart.html"></div>
+
+		<!-- Content page -->
+		<section class="bg0 p-t-164 p-b-116">
+        <div class="container">
+            <div class="">
+                <div class="size-210 bor10 m-auto p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+                    <form ng-if="!isDoneCheckCode" method="post" name="formdulieu">
+                        <h4 class="mtext-105 cl2 txt-center p-b-30">
+                            Quên mật khẩu
+                        </h4>
+
+                        <div class="d-flex justify-content-between">
+                            <div style="width: -webkit-fill-available;" class="bor8 m-b-20 how-pos4-parent">
+                                <input ng-model="password.emailSend" class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" type="email" name="diachi" placeholder="Nhập email" required>
+                                <img class="how-pos4 pointer-none" src="/images/icons/icon-email.png" alt="ICON">
+                            </div>
+							
+                            <button ng-if="!isSended" ng-disabled="formdulieu.$invalid" ng-click="sendCode()" style="width:190px ;" class="m-b-20 cl0 bg3 hov-btn3 trans-04 pointer">Gửi mã xác nhận</button>
+                            <button ng-if="isSended" ng-disabled="formdulieu.$invalid" ng-click="sendCode()" style="width:190px ;" class="m-b-20 cl0 bg3 hov-btn3 trans-04 pointer">Gửi lại mã</button>
+                        </div>
+						<div ng-show="formdulieu.diachi.$dirty  || formdulieu.$submitted">
+							<span class="badge badge-danger font-italic" ng-show="formdulieu.diachi.$error.pattern">
+								Vui lòng nhập đúng định dạng email (VD: user@gmail.com)</span>
+							<span class="badge badge-danger"
+								ng-show="formdulieu.diachi.$error.required">
+								Email không được rỗng
+							</span>
+						</div><br>
+                        <div ng-if="isSended" class="bor8 m-b-20 how-pos4-parent">
+                            <input ng-model="password.codeFromClient" class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="maxn" placeholder="Nhập mã xác nhận" required>
+                            <img class="how-pos4 pointer-none" src="/images/icons/favicon.png" alt="ICON">
+                        </div>
+                        
+                        <button ng-if="isSended" ng-disabled="formdulieu.$invalid" ng-click="checkCode()" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
+                            Tiếp tục
+                        </button>
+						<div ng-show="formdulieu.maxn.$dirty  || formdulieu.$submitted">
+							<span class="badge badge-danger"
+								ng-show="formdulieu.maxn.$error.required">
+								Mã xác nhận không được rỗng
+							</span>
+						</div><br>
+                    </form>
+                    <form ng-if="isDoneCheckCode" method="post" name="formmatkhau">
+                        <h4 class="mtext-105 cl2 txt-center p-b-30">
+                            Nhập lại mật khẩu
+                        </h4>
+
+                        <div class="d-flex justify-content-between">
+                            <div style="width: -webkit-fill-available;" class="bor8 m-b-20 how-pos4-parent">
+                                <input ng-model="password.newPass" class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="password" ng-minlength="6" name="mk1" required placeholder="Nhập mật khẩu mới">
+                                <img class="how-pos4 pointer-none" src="/images/icons/icon-email.png" alt="ICON">
+                            </div>
+                        </div>
+						<div ng-show="formmatkhau.mk1.$dirty  || formdulieu.$submitted">
+							<span class="badge badge-danger"
+								ng-show="formmatkhau.mk1.$error.required">
+								Mật khẩu không được rỗng
+							</span>
+							<span class="badge badge-danger"
+								ng-show="formmatkhau.mk1.$error.minlength">
+								Mật khẩu phải từ 6 kí tự trở lên
+							</span>
+						</div><br>
+                        <div class="bor8 m-b-20 how-pos4-parent">
+                            <input ng-model="password.confirmPass" class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="password" ng-minlength="6" name="mk2" required placeholder="Nhập mã lại mật khẩu">
+                            <img class="how-pos4 pointer-none" src="/images/icons/favicon.png" alt="ICON">
+                        </div>
+						<div ng-show="formmatkhau.mk2.$dirty  || formmatkhau.$submitted">
+							<span class="badge badge-danger"
+								ng-show="formmatkhau.mk2.$error.required">
+								Xác nhận mật khẩu không được rỗng
+							</span>
+							<span class="badge badge-danger"
+								ng-show="formmatkhau.mk2.$error.minlength">
+								Xác nhận mật khẩu phải từ 6 kí tự trở lên
+							</span>
+						</div><br>
+                        <button ng-disabled="formmatkhau.$invalid" ng-click="checkNewPass()" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
+                            Hoàn thành
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+		<!-- Back to top -->
+		<div class="btn-back-to-top" id="myBtn">
+			<span class="symbol-btn-back-to-top">
+				<i class="zmdi zmdi-chevron-up"></i>
+			</span>
+		</div>
+
+
+
+		<script src="/js/shopping-cart-app.js"></script>
+		<!--===============================================================================================-->
+		<script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
+		<!--===============================================================================================-->
+		<script src="/vendor/animsition/js/animsition.min.js"></script>
+		<!--===============================================================================================-->
+		<script src="/vendor/bootstrap/js/popper.js}"></script>
+		<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+		<!--===============================================================================================-->
+		<script src="/vendor/select2/select2.min.js"></script>
+		<script>
+			$(".js-select2").each(function () {
+				$(this).select2({
+					minimumResultsForSearch: 20,
+					dropdownParent: $(this).next('.dropDownSelect2')
+				});
+			})
+		</script>
+		<!--===============================================================================================-->
+		<script src="/vendor/daterangepicker/moment.min.js"></script>
+		<script src="/vendor/daterangepicker/daterangepicker.js"></script>
+		<!--===============================================================================================-->
+		<script type="text/javascript" src="/vendor/slick/slick.min.js"></script>
+		<script type="text/javascript" src="/js/slick-custom.js"></script>
+		<!--===============================================================================================-->
+		<script type="text/javascript" src="/vendor/parallax100/parallax100.js"></script>
+		<script>
+			$('.parallax100').parallax100();
+		</script>
+		<!--===============================================================================================-->
+		<script type="text/javascript" src="/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+		<script>
+			$('.gallery-lb').each(function () { // the containers for all your galleries
+				$(this).magnificPopup({
+					delegate: 'a', // the selector for gallery item
+					type: 'image',
+					gallery: {
+						enabled: true
+					},
+					mainClass: 'mfp-fade'
+				});
+			});
+		</script>
+		<!--===============================================================================================-->
+		<script type="text/javascript" src="/vendor/isotope/isotope.pkgd.min.js"></script>
+		<!--===============================================================================================-->
+		<script type="text/javascript" src="/vendor/sweetalert/sweetalert.min.js"></script>
+		<script>
+			$('.js-addwish-b2').on('click', function (e) {
+				e.preventDefault();
+			});
+
+			$('.js-addwish-b2').each(function () {
+				var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+				$(this).on('click', function () {
+					swal(nameProduct, "is added to wishlist !", "success");
+
+					$(this).addClass('js-addedwish-b2');
+					$(this).off('click');
+				});
+			});
+
+			$('.js-addwish-detail').each(function () {
+				var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+
+				$(this).on('click', function () {
+					swal(nameProduct, "is added to wishlist !", "success");
+
+					$(this).addClass('js-addedwish-detail');
+					$(this).off('click');
+				});
+			});
+
+			/*---------------------------------------------*/
+
+			$('.js-addcart-detail').each(function () {
+				var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+				$(this).on('click', function () {
+					swal(nameProduct, "is added to cart !", "success");
+				});
+			});
+		</script>
+		<!--===============================================================================================-->
+		<script src="/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+		<script>
+			$('.js-pscroll').each(function () {
+				$(this).css('position', 'relative');
+				$(this).css('overflow', 'hidden');
+				var ps = new PerfectScrollbar(this, {
+					wheelSpeed: 1,
+					scrollingThreshold: 1000,
+					wheelPropagation: false,
+				});
+
+				$(window).on('resize', function () {
+					ps.update();
+				})
+			});
+		</script>
+		<!--===============================================================================================-->
+		<script src="/js/main.js"></script>
+	</main>
+</body>
+
+</html>

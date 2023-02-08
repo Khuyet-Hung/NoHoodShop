@@ -1,0 +1,42 @@
+<div class="panel panel-default">
+	<div class="panel-heading">CATEGORY EDITION</div>
+	<div class="panel-body">
+		<div class="row">
+
+			<div class="col-sm-8">
+				<div class="form-group col-sm-12">
+					<div>Id</div>
+					<input ng-model="form.id" type="text" class="form-control">
+				</div>
+				<div class="form-group col-sm-12">
+					<div>Category</div>
+					<input ng-model="form.name" type="text" class="form-control">
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+</div>
+</div>
+
+<div class="panel-footer text-center">
+	<button ng-click="create()" class="btn btn-primary">
+		<b class="glyphicon glyphicon-plus"></b> Create
+	</button>
+
+	<button ng-click="update()" class="btn btn-primary">
+		<b class="glyphicon glyphicon-plus"></b> Update
+	</button>
+
+	<button ng-click="delete(form)" class="btn btn-primary">
+		<b class="glyphicon glyphicon-plus"></b> Delete
+	</button>
+
+	<button ng-click="reset()" class="btn btn-primary">
+		<b class="glyphicon glyphicon-plus"></b> Reset
+	</button>
+</div>
+<br>

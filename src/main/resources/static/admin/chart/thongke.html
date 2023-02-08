@@ -1,0 +1,96 @@
+
+<div class="row">
+	<div class="col-md-6 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="flex-md-grow-1 flex-xl-grow-0">
+					<label>Năm: </label>
+					<select ng-options="mon.number for mon in year1" ng-model="namtron" ng-change="searchmonth1()" class="btn btn-sm btn-light bg-white dropdown-toggle">
+					</select>
+					<label>Tháng: </label>
+					<select ng-options="mon.number for mon in month1" ng-model="thangtron" ng-change="thongkesoluongsptg()"  class="btn btn-sm btn-light bg-white dropdown-toggle">
+					</select>
+				</div>
+				<div id="sales-legend" class="chartjs-legend mt-4 mb-2"></div>
+				<div class="d-flex justify-content-between">
+
+					<p class="card-title">Thống kê tổng số lượng bán ra của sản phẩm</p>
+
+				</div>
+				<!-- <p class="font-weight-500">The total number of sessions within the date range. It is the period time a
+			  user is actively engaged with your website, page or app, etc</p> -->
+
+				<div id="thongkesp"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-6 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="flex-md-grow-1 flex-xl-grow-0">
+					<label>Năm: </label>
+					<select ng-options="mon.number for mon in year2" ng-model="namtron1" ng-change="searchmonth2()" class="btn btn-sm btn-light bg-white dropdown-toggle">
+					</select>
+					<label>Tháng: </label>
+					<select ng-options="mon.number for mon in month2" ng-model="thangtron1" ng-change="thongketheloaitltg()"  class="btn btn-sm btn-light bg-white dropdown-toggle">
+					</select>
+				</div>
+				<div class="d-flex justify-content-between">
+					<p class="card-title">Thống kê tổng số lượng bán ra của thể loại</p>
+				</div>
+				<!-- <p class="font-weight-500">The total number of sessions within the date range. It is the period time a
+			  user is actively engaged with your website, page or app, etc</p> -->
+				<div id="sales-legend" class="chartjs-legend mt-4 mb-2"></div>
+				<div id="thongketheloaisl"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="flex-md-grow-1 flex-xl-grow-0">
+					<label>Năm: </label>
+					<select ng-options="mon.number for mon in year3" ng-model="namtron2" ng-change="searchmonth3()" class="btn btn-sm btn-light bg-white dropdown-toggle">
+					</select>
+					<label>Tháng: </label>
+					<select ng-options="mon.number for mon in month3" ng-model="thangtron2" ng-change="thongketheloaisltl()"  class="btn btn-sm btn-light bg-white dropdown-toggle">
+					</select>
+				</div>
+				<div class="d-flex justify-content-between">
+					<p class="card-title">Thống kê tổng doanh thu của thể loại</p>
+					<!-- <a href="#" class="text-info">View all</a> -->
+				</div>
+				<!-- <p class="font-weight-500">The total number of sessions within the date range. It is the period time a
+			  user is actively engaged with your website, page or app, etc</p> -->
+				<div id="sales-legend" class="chartjs-legend mt-4 mb-2"></div>
+				<div id="thongketheloaidt"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="flex-md-grow-1 flex-xl-grow-0">
+					<label>Năm: </label>
+					<select ng-options="mon.number for mon in year" ng-model="nam" ng-change="searchmonth()" class="btn btn-sm btn-light bg-white dropdown-toggle">
+					</select>
+					<label>Tháng: </label>
+					<select ng-options="mon.number for mon in month" ng-model="thang" ng-change="thongkesptg()"  class="btn btn-sm btn-light bg-white dropdown-toggle">
+					</select>
+				</div>
+				<div class="d-flex justify-content-between">
+					<p class="card-title">Thống kê tổng doanh thu của sản phẩm</p>
+					<!-- <a href="#" class="text-info">View all</a> -->
+				</div>
+				<!-- <p class="font-weight-500">The total number of sessions within the date range. It is the period time a
+			  user is actively engaged with your website, page or app, etc</p> -->
+				<div id="sales-legend" class="chartjs-legend mt-4 mb-2"></div>
+				<div id="thongkedt"></div>
+			</div>
+		</div>
+	</div>
+
+</div>

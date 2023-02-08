@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Home 03</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="/images/icons/favicon.png" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/fonts/iconic/css/material-design-iconic-font.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/fonts/linearicons-v1.0.0/icon-font.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/perfect-scrollbar/perfect-scrollbar.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+	<link rel="stylesheet" href="/css/editinfo/editinfo.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js" type="text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular-route.js"
+		type="text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+		<script type="text/javascript"
+		src="https://www.paypal.com/sdk/js?client-id=ATJ3U6H90acqBlX14alwUaK7YX6yOvBQ8GvdjUud_divzaNS7D7oIhFRz39pGMNMqMkSNioASgPNO3Vm"></script>
+</head>
+
+<body class="animsition" ng-app="shopping-cart-app" ng-controller="address-ctrl">
+	<div ng-controller="shopping-cart-ctrl">
+		<header class="header_area">
+			<!-- Top menu -->
+			<div th:replace="/layout/header.html"></div>
+		</header>
+
+		<div th:replace="/layout/cart.html"></div>
+	</div>
+	<section class="bg0 p-t-120 p-b-60">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-lg-3 p-b-80">
+					<div th:replace="/account/navsidebar.html"></div>
+				</div>
+				<div class="col-md-8 col-lg-9 p-b-80">
+					<div class="d-flex justify-content-between align-items-center">
+						<h4 class="mtext-112 cl2">Địa chỉ của tôi</h4>
+						<button type="submit" data-toggle="modal" data-target="#staticBackdrop"
+							class="flex-c-m m-r-8 mtext-101 cl0 size-102 bg3 hov-btn3 p-lr-12 trans-04 pointer"
+							ng-click="addAddress()">
+							<i class="fa fa-plus m-r-5" aria-hidden="true"></i>Thêm địa chỉ
+							mới
+						</button>
+					</div>
+
+					<hr>
+
+					<div class="">
+						<h4 class="mtext-112 cl2">Địa chỉ</h4>
+						<div ng-repeat="addr in pager.Addresses | orderBy : '-isdefault'">
+							<div class="d-flex justify-content-between m-tb-20 align-items-end">
+								<div class="">
+									<h5 class="m-b-6 cl5">{{addr.fullname}}</h5>
+									<p>{{addr.streetname}}, {{addr.ward.wardname}},
+										{{addr.district.districtname}},
+										{{addr.province.provincename}}</p>
+								</div>
+								<div class="d-flex flex-column align-items-end">
+									<div class="">
+										<a class="m-r-6" href="#" data-toggle="modal" data-target="#staticBackdrop"
+											ng-click="editAddress(addr)">Cập
+											nhật</a> <a ng-click="deleteAddress(addr.addressid)">Xóa</a>
+									</div>
+									<button ng-if="!addr.isdefault" ng-click="changeDefaultAddress(addr)"
+										class="bor20 m-t-10 p-all-3 bg-none">Thiết lặp mặc
+										định</button>
+									<button ng-if="addr.isdefault"
+										class="bor20 op-06 select m-t-10 p-all-3 bg-none">Đang
+										mặc định</button>
+								</div>
+							</div>
+
+							<hr>
+						</div>
+
+						
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div th:replace="/layout/footer.html"></div>
+	<!--  -->
+
+	<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-content">
+				<div class="modal-body">
+					<h4 class="p-b-10">Cập nhật địa chỉ</h4>
+					<div class="row">
+						<div class="col-6">
+							<div class="m-b-20 how-pos4-parent">
+								<p class="stext-113" style="padding: 10px 10px 0px 0px">
+									<strong>Họ và tên người nhận: </strong>
+								</p>
+								<input style="height: 26px; border-bottom: 1px solid;"
+									class="stext-113 cl2 plh3 size-111" type="text" ng-model="address.fullname"
+									placeholder="Nhập tên người nhận">
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="m-b-20 how-pos4-parent">
+								<p class="stext-113" style="padding: 10px 10px 0px 0px">
+									<strong>Số điện thoại: </strong>
+								</p>
+								<input style="height: 26px; border-bottom: 1px solid;"
+									class="stext-113 cl2 plh3 size-111" type="text" ng-model="address.phonenumber"
+									placeholder="Nhập số điện thoại">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-4">
+							<div class=" m-b-20 how-pos4-parent">
+								<p class="stext-113" style="padding: 10px 10px 0px 0px">
+									<strong>Tỉnh / Thành phố: </strong>
+								</p>
+								<select style="height: 34px;width:100%" id="" class="stext-111 cl2 "
+									ng-change="viewDistrict.selectProvince()" ng-model="address.province.provinceid">
+									<option ng-value="0">Chọn tỉnh / thành phố</option>
+									<option ng-repeat="p in Provinces | orderBy : 'provincename'"
+										ng-value="p.provinceid">{{p.provincename}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-4">
+							<div class=" m-b-20 how-pos4-parent">
+								<p class="stext-113" style="padding: 10px 10px 0px 0px">
+									<strong>Quận / Huyện: </strong>
+								</p>
+								<select style="height: 34px;width:100%" id="" class="stext-111 cl2 "
+									ng-change="viewWard.selectDistrict()" ng-model="address.district.districtid">
+									<option ng-value="0">Chọn quận / huyện</option>
+									<option ng-repeat="d in Districts | orderBy : 'districtname'"
+										ng-value="d.districtid">{{d.districtname}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-4">
+							<div class=" m-b-20 how-pos4-parent">
+								<p class="stext-113" style="padding: 10px 10px 0px 0px">
+									<strong>Phường / Xã: </strong>
+								</p>
+								<select style="height: 34px;width:100%" id="" class="stext-111 cl2 "
+									ng-model="address.ward.wardid">
+									<option ng-value="0">Chọn phường / xã</option>
+									<option ng-repeat="w in Wards | orderBy : 'wardname'" ng-value="w.wardid">
+										{{w.wardname}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="m-b-20 how-pos4-parent">
+								<p class="stext-113" style="padding: 10px 10px 0px 0px">
+									<strong>Địa chỉ: </strong>
+								</p>
+								<input style="height: 26px; border-bottom: 1px solid;"
+									class="stext-113 cl2 plh3 size-111" type="text" ng-model="address.streetname"
+									placeholder="Nhập số nhà và tên đường">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<iframe
+								src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.685436117716!2d106.63305511471899!3d10.835367292281555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752978b39f8f73%3A0xed9b3cd640dda266!2zMjIxIFBoYW4gSHV5IMONY2gsIFBoxrDhu51uZyAxMiwgR8OyIFbhuqVwLCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1665811301363!5m2!1svi!2s"
+								width="100%" height="250" style="border: 0;" allowfullscreen="" loading="lazy"
+								referrerpolicy="no-referrer-when-downgrade"></iframe>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" style="border-radius: 0;" class=" btn hov3 bg-none" data-dismiss="modal"
+						data-target="#staticBackdrop">Trở lại</button>
+					<button ng-click="createAddress()" type="button" style="border-radius: 0;"
+						class=" btn bg1 text-white" data-dismiss="modal" data-target="#staticBackdrop">Hoàn
+						thành</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="/js/shopping-cart-app.js"></script>
+	<!--===============================================================================================-->
+	<script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="/vendor/animsition/js/animsition.min.js"></script>
+	<script src="/vendor/bootstrap/js/popper.js"></script>
+	<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="/vendor/select2/select2.min.js"></script>
+	<script>
+		$(".js-select2").each(function () {
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+		})
+	</script>
+	<!--===============================================================================================-->
+	<script src="/vendor/daterangepicker/moment.min.js"></script>
+	<script src="/vendor/daterangepicker/daterangepicker.js"></script>
+	<!--===============================================================================================-->
+	<script src="/vendor/slick/slick.min.js"></script>
+	<script src="/js/slick-custom.js"></script>
+	<!--===============================================================================================-->
+	<script src="/vendor/parallax100/parallax100.js"></script>
+	<script>
+		$('.parallax100').parallax100();
+	</script>
+	<!--===============================================================================================-->
+	<script src="/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+	<script>
+		$('.gallery-lb').each(function () { // the containers for all your galleries
+			$(this).magnificPopup({
+				delegate: 'a', // the selector for gallery item
+				type: 'image',
+				gallery: {
+					enabled: true
+				},
+				mainClass: 'mfp-fade'
+			});
+		});
+	</script>
+	<!--===============================================================================================-->
+	<script src="/vendor/isotope/isotope.pkgd.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="/vendor/sweetalert/sweetalert.min.js"></script>
+	<script>
+		$('.js-addwish-b2, .js-addwish-detail').on('click', function (e) {
+			e.preventDefault();
+		});
+
+		$('.js-addwish-b2').each(function () {
+			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+			$(this).on('click', function () {
+				swal(nameProduct, "is added to wishlist !", "success");
+
+				$(this).addClass('js-addedwish-b2');
+				$(this).off('click');
+			});
+		});
+
+		$('.js-addwish-detail').each(function () {
+			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+
+			$(this).on('click', function () {
+				swal(nameProduct, "is added to wishlist !", "success");
+
+				$(this).addClass('js-addedwish-detail');
+				$(this).off('click');
+			});
+		});
+
+		/*---------------------------------------------*/
+
+		$('.js-addcart-detail').each(function () {
+			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+			$(this).on('click', function () {
+				swal(nameProduct, "is added to cart !", "success");
+			});
+		});
+
+	</script>
+	<!--===============================================================================================-->
+	<script src="/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script>
+		$('.js-pscroll').each(function () {
+			$(this).css('position', 'relative');
+			$(this).css('overflow', 'hidden');
+			var ps = new PerfectScrollbar(this, {
+				wheelSpeed: 1,
+				scrollingThreshold: 1000,
+				wheelPropagation: false,
+			});
+
+			$(window).on('resize', function () {
+				ps.update();
+			})
+		});
+	</script>
+	<!--===============================================================================================-->
+	<script src="/js/main.js"></script>
+</body>
+
+</html>

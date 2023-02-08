@@ -1,0 +1,123 @@
+<div class="col-lg-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+<<<<<<< HEAD
+      <div class="row">
+        <div class="col-9">
+          <h4 class="mtext-105 cl2 txt-center p-b-30">Quản lý đơn hàng</h4>
+        </div>
+        <div class="col-3">
+          <input type="text" class="form-control" placeholder="Tìm kiếm" ng-model="searchBill">
+        </div>
+      </div>
+      <br>
+=======
+      <h4 class="card-title">Quản lý đơn hàng</h4>
+>>>>>>> e3aec8210b585782a42122bde262f66d8076c7d1
+      <select ng-options="c.name for c in status" ng-model="statu" ng-change="searchstatus()" class="form-control">
+      </select>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Mã hóa đơn</th>
+              <th>Thời gian thanh toán</th>
+              <th>Số điện thoại</th>
+              <th>Người đặt</th>
+              <th>Người nhận</th>
+              <th>Tổng tiền</th>
+              <th>Trạng thái</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="item in items | filter: searchBill">
+              <td>{{item.billid}}</td>
+              <td>{{item.billdate | date:'dd/MM/yyyy'}}</td>
+              <td>{{item.address.phonenumber}}</td>
+              <td>{{item.account.fullname}}</td>
+              <td>{{item.address.fullname}}</td>
+              <td>{{item.sumprice | number:0}} đ</td>
+              <td ng-if="item.status == 1"><label class="badge badge-warning">Chờ xác nhận đơn</label></td>
+              <td ng-if="item.status == 2"><label class="badge badge-info">Đang giao đơn hàng</label></td>
+              <td ng-if="item.status == 3"><label class="badge badge-success">Giao hàng thành công</label></td>
+              <td ng-if="item.status == 4"><label class="badge badge-danger">Hủy đơn hàng</label></td>
+              <td><a class="btn btn-outline-secondary btn-fw" data-toggle="modal" ng-click="edit(item)"
+                  data-target="#exampleModal">Sửa</a></td>
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa thông tin giao hàng</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Số điện thoại: </label>
+                        <input type="tel" ng-model="form.address.phonenumber" placeholder="Nhập số điện thoại"
+                          class="form-control" disabled />
+                      </div>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Địa chỉ: </label>
+                        <textarea class="form-control" placeholder="Địa chỉ" ng-model="form.diachi" disabled></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Người đặt: </label>
+                        <input type="text" ng-model="form.account.fullname" placeholder="Tên người đặt"
+                          class="form-control" disabled />
+                      </div>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Người nhận: </label>
+                        <input type="text" ng-model="form.address.fullname" placeholder="Tên người nhận"
+                          class="form-control" disabled />
+                      </div>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Trạng thái: </label>
+                        <select ng-model="form.status" class="form-control">
+                          <option ng-repeat="c in status" ng-value="c.id">{{c.name}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                      <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="update()">Lưu và thay
+                        đổi</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <br>
+      <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" ng-click="pager.first()">
+              << </a>
+          </li>
+        </ul>
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" ng-click="pager.prev()">
+              < </a>
+          </li>
+        </ul>
+        <ul class="pagination">
+          <li class="page-item"><a style="padding: 0.5rem 0.75rem;display: block; cursor: default;"> {{pager.page + 1}}
+              - {{pager.count}} đến {{pager.count}} </a></li>
+        </ul>
+
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" ng-click="pager.next()"> > </a></li>
+        </ul>
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" ng-click="pager.last()"> >> </a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

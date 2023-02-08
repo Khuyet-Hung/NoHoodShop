@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<head>
+	<title>Home 03</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" th:href="@{/images/icons/favicon.png}" />
+	<!--===============================================================================================-->
+</head>
+
+<body class="animsition" ng-app="shopping-cart-app" ng-controller="shopping-cart-ctrl">
+	<main>
+		<div th:replace="/layout/cart.html"></div>
+		<section class="bg0 p-t-120 p-b-60" ng-controller="list-order-ctrl">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 col-lg-3 p-b-80">
+						<div th:replace="/account/navsidebar.html"></div>
+					</div>
+					<div class="col-md-8 col-lg-9 p-b-80">
+						<form ng-if="!isViewOne" class="bg0 p-b-85">
+							<div class="container">
+								<div class="p-b-10">
+									<h3 class="ltext-103 cl5">
+										Danh sách hóa đơn
+									</h3>
+								</div>
+								<div class="row">
+									<div class="col-lg-10 col-xl-12 m-lr-auto m-b-50 p-r-0">
+										<div class=" m-lr-0-xl">
+											<div class="wrap-table-shopping-cart">
+												<table class="table-shopping-cart">
+													<tr class="table_head">
+														<th class="p-lr-20">Tên người nhận</th>
+														<th class="">Địa chỉ nhận</th>
+														<th class="">Ngày đặt</th>
+														<th class="">Trạng thái</th>
+														<th class=""></th>
+
+													</tr>
+
+													<tr style="height: 100px" class="table_row"
+														ng-repeat="ord in pager.listOrder">
+														<td style="padding-bottom: 0" class="p-lr-20">
+															{{ord.address.fullname}}</td>
+														<td style="padding-bottom: 0" class="">
+															{{ord.address.streetname}}, {{ord.address.ward.wardname}},
+															{{ord.address.district.districtname}},
+															{{ord.address.province.provincename}}</td>
+														<td style="padding-bottom: 0" class="">
+															{{ord.billdate | date : 'dd-MM-yyyy'}}</td>
+
+														<td ng-if="ord.status == 1" style="padding-bottom: 0"><label
+																class="badge badge-warning">Chờ xác nhận đơn</label>
+														</td>
+														<td ng-if="ord.status == 2" style="padding-bottom: 0"><label
+																class="badge badge-info">Đang giao đơn hàng</label></td>
+														<td ng-if="ord.status == 3" style="padding-bottom: 0"><label
+																class="badge badge-success">Giao hàng thành công</label>
+														</td>
+														<td ng-if="ord.status == 4" style="padding-bottom: 0"><label
+																class="badge badge-danger">Hủy đơn hàng</label></td>
+														<td style="padding-bottom: 0" class="">
+															<a ng-click="order.viewById(ord.billid)"
+																class="btn btn-deafault"> Xem chi tiết </a>
+														</td>
+														<td ng-if="ord.status == 1" style="padding-bottom: 0" class="">
+															<a ng-click="cancelorder(ord)" class="btn btn-deafault"> Hủy
+																đơn</a>
+														</td>
+														<td ng-if="ord.status == 3 || ord.status == 4"
+															style="padding-bottom: 0" class="">
+															<a ng-click="preorder(ord)" class="btn btn-deafault"> Đặt
+																lại đơn</a>
+														</td>
+													</tr>
+												</table>
+												
+											</div>
+											<br>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+
+						<form ng-if="isViewOne" class="bg0 p-b-85">
+							<div class="container">
+								<div class="p-b-10 d-flex align-items-center justify-content-between">
+									<h3 class="ltext-103 cl5">
+										Thông tin hóa đơn
+									</h3>
+									<h5> <a ng-click="setViewAll()"> Quay lại</a></h5>
+								</div>
+								<div class="row">
+									<div class="col-lg-10 col-xl-12 m-lr-auto m-b-50  p-r-0">
+										<div class="m-lr-0-xl">
+											<div class="wrap-table-shopping-cart">
+												<table class="table-shopping-cart">
+													<tr class="table_head">
+														<th class="p-lr-20">STT</th>
+														<th class="">Tên sản phẩm</th>
+														<th class="">Tổng</th>
+
+
+													</tr>
+
+													<tr style="height: 100px" class="table_row"
+														ng-repeat="ord in order.orderView">
+														<td style="padding-bottom: 0" class="p-lr-20">{{$index + 1}}
+														</td>
+														<td style="padding-bottom: 0" class="">
+															{{ord.product.productname}}</td>
+														<td style="padding-bottom: 0" class="">
+															{{ord.sumprice * ord.quantity}}</td>
+
+													</tr>
+												</table>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<script src="/js/shopping-cart-app.js"></script>
+		<!--===============================================================================================-->
+		<script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
+		<!--===============================================================================================-->
+		<script src="/vendor/animsition/js/animsition.min.js"></script>
+		<script src="/vendor/bootstrap/js/popper.js"></script>
+		<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+		<!--===============================================================================================-->
+		<script src="/vendor/select2/select2.min.js"></script>
+		<script>
+			$(".js-select2").each(function () {
+				$(this).select2({
+					minimumResultsForSearch: 20,
+					dropdownParent: $(this).next('.dropDownSelect2')
+				});
+			})
+		</script>
+		<!--===============================================================================================-->
+		<script src="/vendor/daterangepicker/moment.min.js"></script>
+		<script src="/vendor/daterangepicker/daterangepicker.js"></script>
+		<!--===============================================================================================-->
+		<script src="/vendor/slick/slick.min.js"></script>
+		<script src="/js/slick-custom.js"></script>
+		<!--===============================================================================================-->
+		<script src="/vendor/parallax100/parallax100.js"></script>
+		<script>
+			$('.parallax100').parallax100();
+		</script>
+		<!--===============================================================================================-->
+		<script src="/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+		<script>
+			$('.gallery-lb').each(function () { // the containers for all your galleries
+				$(this).magnificPopup({
+					delegate: 'a', // the selector for gallery item
+					type: 'image',
+					gallery: {
+						enabled: true
+					},
+					mainClass: 'mfp-fade'
+				});
+			});
+		</script>
+		<!--===============================================================================================-->
+		<script src="/vendor/isotope/isotope.pkgd.min.js"></script>
+		<!--===============================================================================================-->
+		<script src="/vendor/sweetalert/sweetalert.min.js"></script>
+		<script>
+			$('.js-addwish-b2, .js-addwish-detail').on('click', function (e) {
+				e.preventDefault();
+			});
+
+			$('.js-addwish-b2').each(function () {
+				var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+				$(this).on('click', function () {
+					swal(nameProduct, "is added to wishlist !", "success");
+
+					$(this).addClass('js-addedwish-b2');
+					$(this).off('click');
+				});
+			});
+
+			$('.js-addwish-detail').each(function () {
+				var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+
+				$(this).on('click', function () {
+					swal(nameProduct, "is added to wishlist !", "success");
+
+					$(this).addClass('js-addedwish-detail');
+					$(this).off('click');
+				});
+			});
+
+			/*---------------------------------------------*/
+
+			$('.js-addcart-detail').each(function () {
+				var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+				$(this).on('click', function () {
+					swal(nameProduct, "is added to cart !", "success");
+				});
+			});
+
+		</script>
+		<!--===============================================================================================-->
+		<script src="/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+		<script>
+			$('.js-pscroll').each(function () {
+				$(this).css('position', 'relative');
+				$(this).css('overflow', 'hidden');
+				var ps = new PerfectScrollbar(this, {
+					wheelSpeed: 1,
+					scrollingThreshold: 1000,
+					wheelPropagation: false,
+				});
+
+				$(window).on('resize', function () {
+					ps.update();
+				})
+			});
+		</script>
+		<!--===============================================================================================-->
+		<script src="/js/main.js"></script>
+
+	</main>
+</body>
+
+</html>
